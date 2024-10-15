@@ -19,6 +19,12 @@ npm install nodemon
 - **Express**: It is a popular, minimalist web framework for Node.js. It helps you build web applications and APIs by providing essential functionalities like routing, middleware support, and HTTP handling.
 - **Nodemon**: It is a development tool that automatically restarts your Node.js application whenever file changes are detected. It's incredibly useful for development, as it saves you from manually stopping and restarting the server each time you make a change to the code.
 
+By installing them we add them inside the package.json file under "dependencies". That way we can just do:
+```bash
+npm install
+```
+to download any dependencies after pulling the project with github, since we used the .gitignore to omit the node_modules/ dependency folder from our commits.
+
 We are going to write some helpful scripts inside the package.json
 ```javascript
 // Add these under "scripts"
@@ -27,9 +33,10 @@ We are going to write some helpful scripts inside the package.json
 ```
 To start the server type:
 ```bash
-# The only difference is when you make changes to server files.
+# When changes in the server files happen:
+npm run dev # there is no need to reload the server
 
-npm run dev # without the need to reload
-
-npm run start # must reload
+npm run start # must reload the server
 ```
+We use dev for when we are developing and it is expected of files to be changing.
+We use start for when we have something working.
