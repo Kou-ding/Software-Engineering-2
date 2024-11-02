@@ -1,0 +1,1003 @@
+{
+    "openapi" : "3.0.0",
+    "servers" : [ {
+      "description" : "SwaggerHub API Auto Mocking",
+      "url" : "https://virtserver.swaggerhub.com/WIFIRNAS7EN/TravelSet/1.0.0"
+    } ],
+    "info" : {
+      "version" : "1.0.0",
+      "title" : "travelSet",
+      "description" : "The API for the EatBacon IOT project"
+    },
+    "paths" : {
+      "/user/{userId}" : {
+        "get" : {
+          "description" : "Returns the trips of the specific user from the system\n",
+          "operationId" : "getTripsFromDB({userId})",
+          "parameters" : [ {
+            "name" : "userId",
+            "in" : "path",
+            "description" : "tags to filter by",
+            "required" : true,
+            "style" : "simple",
+            "explode" : false,
+            "schema" : {
+              "type" : "integer",
+              "format" : "int64"
+            }
+          } ],
+          "responses" : {
+            "200" : {
+              "description" : "user response",
+              "content" : {
+                "application/json" : {
+                  "schema" : {
+                    "$ref" : "#/components/schemas/Trip"
+                  }
+                }
+              }
+            },
+            "default" : {
+              "description" : "unexpected error",
+              "content" : {
+                "application/json" : {
+                  "schema" : {
+                    "$ref" : "#/components/schemas/Error"
+                  }
+                }
+              }
+            }
+          }
+        }
+      },
+      "/user/{userId}/createTrip" : {
+        "post" : {
+          "description" : "Returns the specific user from the system\n",
+          "operationId" : "addTrip",
+          "parameters" : [ {
+            "name" : "userId",
+            "in" : "path",
+            "description" : "tags to filter by",
+            "required" : true,
+            "style" : "simple",
+            "explode" : false,
+            "schema" : {
+              "type" : "integer",
+              "format" : "int64"
+            }
+          } ],
+          "requestBody" : {
+            "description" : "Trip to add to the user",
+            "content" : {
+              "application/json" : {
+                "schema" : {
+                  "$ref" : "#/components/schemas/NewTrip"
+                }
+              }
+            },
+            "required" : true
+          },
+          "responses" : {
+            "200" : {
+              "description" : "Trip response",
+              "content" : {
+                "application/json" : {
+                  "schema" : {
+                    "$ref" : "#/components/schemas/Trip"
+                  }
+                }
+              }
+            },
+            "default" : {
+              "description" : "unexpected error",
+              "content" : {
+                "application/json" : {
+                  "schema" : {
+                    "$ref" : "#/components/schemas/Error"
+                  }
+                }
+              }
+            }
+          }
+        }
+      },
+      "/user/{userId}/trip/{tripId}" : {
+        "get" : {
+          "description" : "Returns the specific trip from the system\n",
+          "operationId" : "loadTripFromDB({tripId})",
+          "parameters" : [ {
+            "name" : "userId",
+            "in" : "path",
+            "description" : "tags to filter by",
+            "required" : true,
+            "style" : "simple",
+            "explode" : false,
+            "schema" : {
+              "type" : "integer",
+              "format" : "int64"
+            }
+          }, {
+            "name" : "tripId",
+            "in" : "path",
+            "description" : "tags to filter by",
+            "required" : true,
+            "style" : "simple",
+            "explode" : false,
+            "schema" : {
+              "type" : "integer",
+              "format" : "int64"
+            }
+          } ],
+          "responses" : {
+            "200" : {
+              "description" : "trip response",
+              "content" : {
+                "application/json" : {
+                  "schema" : {
+                    "$ref" : "#/components/schemas/Trip"
+                  }
+                }
+              }
+            },
+            "default" : {
+              "description" : "unexpected error",
+              "content" : {
+                "application/json" : {
+                  "schema" : {
+                    "$ref" : "#/components/schemas/Error"
+                  }
+                }
+              }
+            }
+          }
+        }
+      },
+      "/user/{userId}/trip/{tripId}/print" : {
+        "get" : {
+          "description" : "Returns the specific trip from the system\n",
+          "operationId" : "prepareContent({tripId})",
+          "parameters" : [ {
+            "name" : "userId",
+            "in" : "path",
+            "description" : "tags to filter by",
+            "required" : true,
+            "style" : "simple",
+            "explode" : false,
+            "schema" : {
+              "type" : "integer",
+              "format" : "int64"
+            }
+          }, {
+            "name" : "tripId",
+            "in" : "path",
+            "description" : "tags to filter by",
+            "required" : true,
+            "style" : "simple",
+            "explode" : false,
+            "schema" : {
+              "type" : "integer",
+              "format" : "int64"
+            }
+          } ],
+          "responses" : {
+            "200" : {
+              "description" : "trip response",
+              "content" : {
+                "application/json" : {
+                  "schema" : {
+                    "$ref" : "#/components/schemas/PrintableTripEntity"
+                  }
+                }
+              }
+            },
+            "default" : {
+              "description" : "unexpected error",
+              "content" : {
+                "application/json" : {
+                  "schema" : {
+                    "$ref" : "#/components/schemas/Error"
+                  }
+                }
+              }
+            }
+          }
+        }
+      },
+      "/user/{userId}/trip/{tripId}/addAccomodation" : {
+        "post" : {
+          "description" : "Accomodation to add to the trip",
+          "operationId" : "addAccomodation",
+          "parameters" : [ {
+            "name" : "userId",
+            "in" : "path",
+            "description" : "tags to filter by",
+            "required" : true,
+            "style" : "simple",
+            "explode" : false,
+            "schema" : {
+              "type" : "integer",
+              "format" : "int64"
+            }
+          }, {
+            "name" : "tripId",
+            "in" : "path",
+            "description" : "tags to filter by",
+            "required" : true,
+            "style" : "simple",
+            "explode" : false,
+            "schema" : {
+              "type" : "integer",
+              "format" : "int64"
+            }
+          } ],
+          "requestBody" : {
+            "description" : "Accomodation to add to the trip",
+            "content" : {
+              "application/json" : {
+                "schema" : {
+                  "$ref" : "#/components/schemas/Accomodation"
+                }
+              }
+            },
+            "required" : true
+          },
+          "responses" : {
+            "200" : {
+              "description" : "pet response",
+              "content" : {
+                "application/json" : {
+                  "schema" : {
+                    "$ref" : "#/components/schemas/Trip"
+                  }
+                }
+              }
+            },
+            "default" : {
+              "description" : "unexpected error",
+              "content" : {
+                "application/json" : {
+                  "schema" : {
+                    "$ref" : "#/components/schemas/Error"
+                  }
+                }
+              }
+            }
+          }
+        }
+      },
+      "/user/{userId}/trip/{tripId}/addTransportation" : {
+        "post" : {
+          "description" : "Transportation to add to the trip",
+          "operationId" : "addTransportation",
+          "parameters" : [ {
+            "name" : "userId",
+            "in" : "path",
+            "description" : "tags to filter by",
+            "required" : true,
+            "style" : "simple",
+            "explode" : false,
+            "schema" : {
+              "type" : "integer",
+              "format" : "int64"
+            }
+          }, {
+            "name" : "tripId",
+            "in" : "path",
+            "description" : "tags to filter by",
+            "required" : true,
+            "style" : "simple",
+            "explode" : false,
+            "schema" : {
+              "type" : "integer",
+              "format" : "int64"
+            }
+          } ],
+          "requestBody" : {
+            "description" : "Transportation to add to the trip",
+            "content" : {
+              "application/json" : {
+                "schema" : {
+                  "$ref" : "#/components/schemas/Transportation"
+                }
+              }
+            },
+            "required" : true
+          },
+          "responses" : {
+            "200" : {
+              "description" : "pet response",
+              "content" : {
+                "application/json" : {
+                  "schema" : {
+                    "$ref" : "#/components/schemas/Trip"
+                  }
+                }
+              }
+            },
+            "default" : {
+              "description" : "unexpected error",
+              "content" : {
+                "application/json" : {
+                  "schema" : {
+                    "$ref" : "#/components/schemas/Error"
+                  }
+                }
+              }
+            }
+          }
+        }
+      },
+      "/user/{userId}/trip/{tripId}/addBudget" : {
+        "post" : {
+          "description" : "Budget to add to the trip",
+          "operationId" : "addBudget",
+          "parameters" : [ {
+            "name" : "userId",
+            "in" : "path",
+            "description" : "tags to filter by",
+            "required" : true,
+            "style" : "simple",
+            "explode" : false,
+            "schema" : {
+              "type" : "integer",
+              "format" : "int64"
+            }
+          }, {
+            "name" : "tripId",
+            "in" : "path",
+            "description" : "tags to filter by",
+            "required" : true,
+            "style" : "simple",
+            "explode" : false,
+            "schema" : {
+              "type" : "integer",
+              "format" : "int64"
+            }
+          } ],
+          "requestBody" : {
+            "description" : "Budget to add to the trip",
+            "content" : {
+              "application/json" : {
+                "schema" : {
+                  "$ref" : "#/components/schemas/Trip"
+                }
+              }
+            },
+            "required" : true
+          },
+          "responses" : {
+            "200" : {
+              "description" : "pet response",
+              "content" : {
+                "application/json" : {
+                  "schema" : {
+                    "$ref" : "#/components/schemas/Trip"
+                  }
+                }
+              }
+            },
+            "default" : {
+              "description" : "unexpected error",
+              "content" : {
+                "application/json" : {
+                  "schema" : {
+                    "$ref" : "#/components/schemas/Error"
+                  }
+                }
+              }
+            }
+          }
+        }
+      },
+      "/user/{userId}/trip/{tripId}/day/{dayId}" : {
+        "get" : {
+          "description" : "Returns the specific trip from the system\n",
+          "operationId" : "findDay({dayId})",
+          "parameters" : [ {
+            "name" : "userId",
+            "in" : "path",
+            "description" : "tags to filter by",
+            "required" : true,
+            "style" : "simple",
+            "explode" : false,
+            "schema" : {
+              "type" : "integer",
+              "format" : "int64"
+            }
+          }, {
+            "name" : "tripId",
+            "in" : "path",
+            "description" : "tags to filter by",
+            "required" : true,
+            "style" : "simple",
+            "explode" : false,
+            "schema" : {
+              "type" : "integer",
+              "format" : "int64"
+            }
+          }, {
+            "name" : "dayId",
+            "in" : "path",
+            "description" : "tags to filter by",
+            "required" : true,
+            "style" : "simple",
+            "explode" : false,
+            "schema" : {
+              "type" : "integer",
+              "format" : "int64"
+            }
+          } ],
+          "responses" : {
+            "200" : {
+              "description" : "user response",
+              "content" : {
+                "application/json" : {
+                  "schema" : {
+                    "$ref" : "#/components/schemas/Day"
+                  }
+                }
+              }
+            },
+            "default" : {
+              "description" : "unexpected error",
+              "content" : {
+                "application/json" : {
+                  "schema" : {
+                    "$ref" : "#/components/schemas/Error"
+                  }
+                }
+              }
+            }
+          }
+        }
+      },
+      "/user/{userId}/trip/{tripId}/day/addDay" : {
+        "post" : {
+          "description" : "Adds an activity",
+          "operationId" : "addDay",
+          "parameters" : [ {
+            "name" : "userId",
+            "in" : "path",
+            "description" : "tags to filter by",
+            "required" : true,
+            "style" : "simple",
+            "explode" : false,
+            "schema" : {
+              "type" : "integer",
+              "format" : "int64"
+            }
+          }, {
+            "name" : "tripId",
+            "in" : "path",
+            "description" : "tags to filter by",
+            "required" : true,
+            "style" : "simple",
+            "explode" : false,
+            "schema" : {
+              "type" : "integer",
+              "format" : "int64"
+            }
+          } ],
+          "responses" : {
+            "200" : {
+              "description" : "user response",
+              "content" : {
+                "application/json" : {
+                  "schema" : {
+                    "$ref" : "#/components/schemas/Day"
+                  }
+                }
+              }
+            },
+            "default" : {
+              "description" : "unexpected error",
+              "content" : {
+                "application/json" : {
+                  "schema" : {
+                    "$ref" : "#/components/schemas/Error"
+                  }
+                }
+              }
+            }
+          }
+        }
+      },
+      "/user/{userId}/trip/{tripId}/day/{dayId}/deleteDay" : {
+        "delete" : {
+          "description" : "deletes a single day based on the ID supplied",
+          "operationId" : "deleteDay({dayId})",
+          "parameters" : [ {
+            "name" : "userId",
+            "in" : "path",
+            "description" : "tags to filter by",
+            "required" : true,
+            "style" : "simple",
+            "explode" : false,
+            "schema" : {
+              "type" : "integer",
+              "format" : "int64"
+            }
+          }, {
+            "name" : "tripId",
+            "in" : "path",
+            "description" : "tags to filter by",
+            "required" : true,
+            "style" : "simple",
+            "explode" : false,
+            "schema" : {
+              "type" : "integer",
+              "format" : "int64"
+            }
+          }, {
+            "name" : "dayId",
+            "in" : "path",
+            "description" : "tags to filter by",
+            "required" : true,
+            "style" : "simple",
+            "explode" : false,
+            "schema" : {
+              "type" : "integer",
+              "format" : "int64"
+            }
+          } ],
+          "responses" : {
+            "200" : {
+              "description" : "delete Day"
+            },
+            "default" : {
+              "description" : "unexpected error",
+              "content" : {
+                "application/json" : {
+                  "schema" : {
+                    "$ref" : "#/components/schemas/Error"
+                  }
+                }
+              }
+            }
+          }
+        }
+      },
+      "/user/{userId}/trip/{tripId}/day/{dayId}/addActivity" : {
+        "post" : {
+          "description" : "Adds an activity",
+          "operationId" : "addActivity",
+          "parameters" : [ {
+            "name" : "userId",
+            "in" : "path",
+            "description" : "tags to filter by",
+            "required" : true,
+            "style" : "simple",
+            "explode" : false,
+            "schema" : {
+              "type" : "integer",
+              "format" : "int64"
+            }
+          }, {
+            "name" : "tripId",
+            "in" : "path",
+            "description" : "tags to filter by",
+            "required" : true,
+            "style" : "simple",
+            "explode" : false,
+            "schema" : {
+              "type" : "integer",
+              "format" : "int64"
+            }
+          }, {
+            "name" : "dayId",
+            "in" : "path",
+            "description" : "tags to filter by",
+            "required" : true,
+            "style" : "simple",
+            "explode" : false,
+            "schema" : {
+              "type" : "integer",
+              "format" : "int64"
+            }
+          } ],
+          "responses" : {
+            "200" : {
+              "description" : "user response",
+              "content" : {
+                "application/json" : {
+                  "schema" : {
+                    "$ref" : "#/components/schemas/Day"
+                  }
+                }
+              }
+            },
+            "default" : {
+              "description" : "unexpected error",
+              "content" : {
+                "application/json" : {
+                  "schema" : {
+                    "$ref" : "#/components/schemas/Error"
+                  }
+                }
+              }
+            }
+          }
+        }
+      },
+      "/user/{userId}/trip/{tripId}/day/{dayId}/updateActivities" : {
+        "get" : {
+          "description" : "Returns the specific trip from the system\n",
+          "operationId" : "getRecommendedActivities(List<Filter>)",
+          "parameters" : [ {
+            "name" : "userId",
+            "in" : "path",
+            "description" : "tags to filter by",
+            "required" : true,
+            "style" : "simple",
+            "explode" : false,
+            "schema" : {
+              "type" : "integer",
+              "format" : "int64"
+            }
+          }, {
+            "name" : "tripId",
+            "in" : "path",
+            "description" : "tags to filter by",
+            "required" : true,
+            "style" : "simple",
+            "explode" : false,
+            "schema" : {
+              "type" : "integer",
+              "format" : "int64"
+            }
+          }, {
+            "name" : "dayId",
+            "in" : "path",
+            "description" : "tags to filter by",
+            "required" : true,
+            "style" : "simple",
+            "explode" : false,
+            "schema" : {
+              "type" : "integer",
+              "format" : "int64"
+            }
+          } ],
+          "responses" : {
+            "200" : {
+              "description" : "user response",
+              "content" : {
+                "application/json" : {
+                  "schema" : {
+                    "$ref" : "#/components/schemas/Day"
+                  }
+                }
+              }
+            },
+            "default" : {
+              "description" : "unexpected error",
+              "content" : {
+                "application/json" : {
+                  "schema" : {
+                    "$ref" : "#/components/schemas/Error"
+                  }
+                }
+              }
+            }
+          }
+        }
+      },
+      "/user/{userId}/trip/{tripId}/day/{dayId}/{ActivityId}/deleteActivity" : {
+        "delete" : {
+          "description" : "deletes an activity in a day based on the ID supplied",
+          "operationId" : "deleteActivity",
+          "parameters" : [ {
+            "name" : "userId",
+            "in" : "path",
+            "description" : "tags to filter by",
+            "required" : true,
+            "style" : "simple",
+            "explode" : false,
+            "schema" : {
+              "type" : "integer",
+              "format" : "int64"
+            }
+          }, {
+            "name" : "tripId",
+            "in" : "path",
+            "description" : "tags to filter by",
+            "required" : true,
+            "style" : "simple",
+            "explode" : false,
+            "schema" : {
+              "type" : "integer",
+              "format" : "int64"
+            }
+          }, {
+            "name" : "dayId",
+            "in" : "path",
+            "description" : "tags to filter by",
+            "required" : true,
+            "style" : "simple",
+            "explode" : false,
+            "schema" : {
+              "type" : "integer",
+              "format" : "int64"
+            }
+          }, {
+            "name" : "ActivityId",
+            "in" : "path",
+            "description" : "tags to filter by",
+            "required" : true,
+            "style" : "simple",
+            "explode" : false,
+            "schema" : {
+              "type" : "integer",
+              "format" : "int64"
+            }
+          } ],
+          "responses" : {
+            "200" : {
+              "description" : "delete Activity"
+            },
+            "default" : {
+              "description" : "unexpected error",
+              "content" : {
+                "application/json" : {
+                  "schema" : {
+                    "$ref" : "#/components/schemas/Error"
+                  }
+                }
+              }
+            }
+          }
+        }
+      },
+      "/user/{userId}/trip/{tripId}/day/{dayId}/updateFilters" : {
+        "put" : {
+          "description" : "Returns the specific trip from the system\n",
+          "operationId" : "clickFilter({Filter})",
+          "parameters" : [ {
+            "name" : "userId",
+            "in" : "path",
+            "description" : "tags to filter by",
+            "required" : true,
+            "style" : "simple",
+            "explode" : false,
+            "schema" : {
+              "type" : "integer",
+              "format" : "int64"
+            }
+          }, {
+            "name" : "tripId",
+            "in" : "path",
+            "description" : "tags to filter by",
+            "required" : true,
+            "style" : "simple",
+            "explode" : false,
+            "schema" : {
+              "type" : "integer",
+              "format" : "int64"
+            }
+          }, {
+            "name" : "dayId",
+            "in" : "path",
+            "description" : "tags to filter by",
+            "required" : true,
+            "style" : "simple",
+            "explode" : false,
+            "schema" : {
+              "type" : "integer",
+              "format" : "int64"
+            }
+          } ],
+          "requestBody" : {
+            "description" : "Accomodation to add to the trip",
+            "content" : {
+              "application/json" : {
+                "schema" : {
+                  "$ref" : "#/components/schemas/Filter"
+                }
+              }
+            },
+            "required" : true
+          },
+          "responses" : {
+            "200" : {
+              "description" : "user response",
+              "content" : {
+                "application/json" : {
+                  "schema" : {
+                    "$ref" : "#/components/schemas/Day"
+                  }
+                }
+              }
+            },
+            "default" : {
+              "description" : "unexpected error",
+              "content" : {
+                "application/json" : {
+                  "schema" : {
+                    "$ref" : "#/components/schemas/Error"
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "components" : {
+      "schemas" : {
+        "Trip" : {
+          "required" : [ "id", "destination", "dates", "budget", "isPast", "days" ],
+          "type" : "object",
+          "properties" : {
+            "id" : {
+              "type" : "integer"
+            },
+            "name" : {
+              "type" : "string"
+            },
+            "destination" : {
+              "type" : "string"
+            },
+            "dates" : {
+              "type" : "string"
+            },
+            "budget" : {
+              "type" : "integer"
+            },
+            "days" : {
+              "type" : "object"
+            },
+            "accomodation" : {
+              "type" : "object"
+            },
+            "transportation" : {
+              "type" : "object"
+            }
+          }
+        },
+        "NewTrip" : {
+          "required" : [ "budget", "dates", "destination" ],
+          "type" : "object",
+          "properties" : {
+            "name" : {
+              "type" : "string"
+            },
+            "destination" : {
+              "type" : "string"
+            },
+            "dates" : {
+              "type" : "string"
+            },
+            "budget" : {
+              "type" : "integer"
+            }
+          }
+        },
+        "Activity" : {
+          "required" : [ "description", "lockedStatus", "name", "filters" ],
+          "type" : "object",
+          "properties" : {
+            "name" : {
+              "type" : "string"
+            },
+            "description" : {
+              "type" : "string"
+            },
+            "lockedStatus" : {
+              "type" : "boolean"
+            },
+            "filters" : {
+              "type" : "object"
+            }
+          }
+        },
+        "Budget" : {
+          "required" : [ "price" ],
+          "type" : "object",
+          "properties" : {
+            "price" : {
+              "type" : "integer"
+            }
+          }
+        },
+        "Filter" : {
+          "required" : [ "id", "name", "isActive" ],
+          "type" : "object",
+          "properties" : {
+            "id" : {
+              "type" : "integer"
+            },
+            "name" : {
+              "type" : "string"
+            },
+            "isActive" : {
+              "type" : "boolean"
+            }
+          }
+        },
+        "PrintableTripEntity" : {
+          "required" : [ "id", "destination", "dates", "budget", "transportationDetails", "accomodationDetails", "isPDF" ],
+          "type" : "object",
+          "properties" : {
+            "id" : {
+              "type" : "integer"
+            },
+            "destination" : {
+              "type" : "string"
+            },
+            "dates" : {
+              "type" : "string"
+            },
+            "budget" : {
+              "type" : "integer"
+            },
+            "transportationDetails" : {
+              "type" : "string"
+            },
+            "accomodationDetails" : {
+              "type" : "string"
+            },
+            "isPDF" : {
+              "type" : "boolean"
+            }
+          }
+        },
+        "Transportation" : {
+          "required" : [ "date", "name", "time" ],
+          "type" : "object",
+          "properties" : {
+            "name" : {
+              "type" : "string"
+            },
+            "date" : {
+              "type" : "string"
+            },
+            "time" : {
+              "type" : "integer"
+            }
+          }
+        },
+        "Accomodation" : {
+          "required" : [ "address", "name", "price" ],
+          "type" : "object",
+          "properties" : {
+            "name" : {
+              "type" : "string"
+            },
+            "adress" : {
+              "type" : "string"
+            },
+            "price" : {
+              "type" : "integer"
+            }
+          }
+        },
+        "Day" : {
+          "required" : [ "id", "dayNumber", "activityList" ],
+          "type" : "object",
+          "properties" : {
+            "id" : {
+              "type" : "integer"
+            },
+            "dayNumber" : {
+              "type" : "integer"
+            },
+            "activityList" : {
+              "type" : "object"
+            }
+          }
+        },
+        "Error" : {
+          "required" : [ "code", "message" ],
+          "type" : "object",
+          "properties" : {
+            "code" : {
+              "type" : "integer",
+              "format" : "int32"
+            },
+            "message" : {
+              "type" : "string"
+            }
+          }
+        }
+      }
+    }
+  }
