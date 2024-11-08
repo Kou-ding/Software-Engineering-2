@@ -1,0 +1,807 @@
+openapi: 3.0.0
+servers:
+  - description: SwaggerHub API Auto Mocking
+    url: https://virtserver.swaggerhub.com/WIFIRNAS7EN/TravelSet/1.0.0
+info:
+  title: TravelSet
+  description: The API of a trip management app called TravelSet
+  version: 2.0.0
+  
+paths:
+  /user:
+    post:
+      summary: Create a new user
+      description: Creates a new user in the system with the specified information.
+      operationId: createUser
+      requestBody:
+        description: The user details needed for the object to be created
+        required: true
+        content:
+          application/json:
+            schema:
+                  $ref: "#/components/schemas/User"
+      responses:
+        "200":
+          description: Successful user creation
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/User'
+        default:
+          description: unexpected error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'  
+                
+  /user/{userId}:
+    get:
+      summary: Get a user's trips
+      operationId: getUsersTrips
+      description: Returns the trips that are under a specific user
+      parameters:
+        - name: userId
+          in: path
+          description: The user's Id
+          required: true
+          style: simple
+          explode: false
+          schema:
+            $ref: '#/components/schemas/User'
+      responses:
+        '200':
+          description: Successful retrieval of all user's trips
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Trip'
+        default:
+          description: unexpected error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+                
+  /user/{userId}/trip:
+    post:
+      summary: Create a new trip
+      operationId: createTrip
+      description: The user creates a new trip
+      parameters:
+        - name: userId
+          in: path
+          description: The user's Id
+          required: true
+          style: simple
+          explode: false
+          schema:
+            $ref: '#/components/schemas/User'
+      requestBody:
+        description: Parameters needed to create a new trip
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Trip'
+        required: true
+      responses:
+        '200':
+          description: Successful trip creation
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Trip'
+        default:
+          description: unexpected error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+                
+  /user/{userId}/trip/{tripId}:
+    get:
+      summary: Get a specific trip
+      operationId: getTrip
+      description: Returns a specific trip
+      parameters:
+        - name: userId
+          in: path
+          description: The user's Id
+          required: true
+          style: simple
+          explode: false
+          schema:
+            type: integer
+            format: int64
+        - name: tripId
+          in: path
+          description: The trip's Id
+          required: true
+          style: simple
+          explode: false
+          schema:
+            type: integer
+            format: int64
+      responses:
+        '200':
+          description: Successful retrieval of a specific trip
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Trip'
+        default:
+          description: unexpected error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+                
+  /user/{userId}/trip/{tripId}/accommodation:
+    post:
+      summary: Add a new accommodation
+      operationId: addAccommodation
+      description: Add a specific trip's accommodation
+      parameters:
+        - name: userId
+          in: path
+          description: The user's Id
+          required: true
+          style: simple
+          explode: false
+          schema:
+            type: integer
+            format: int64
+        - name: tripId
+          in: path
+          description: The trip's Id
+          required: true
+          style: simple
+          explode: false
+          schema:
+            type: integer
+            format: int64
+      requestBody:
+        description: The accommodation details needed for the object to be created
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Accommodation'
+        required: true
+      responses:
+        '200':
+          description: Successful accommodation creation
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Accommodation'
+        default:
+          description: unexpected error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+    get:
+      summary: Get accommodation
+      operationId: getAccommodation
+      description: Returns the accommodation of a specific trip
+      parameters:
+        - name: userId
+          in: path
+          description: The user's Id
+          required: true
+          style: simple
+          explode: false
+          schema:
+            type: integer
+            format: int64
+        - name: tripId
+          in: path
+          description: The trip's Id
+          required: true
+          style: simple
+          explode: false
+          schema:
+            type: integer
+            format: int64
+      responses:
+        '200':
+          description: Successful retrieval of a specific trip's accommodation
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Accommodation'
+        default:
+          description: unexpected error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+                
+  /user/{userId}/trip/{tripId}/transportation:
+    post:
+      summary: Add a transportation method
+      operationId: addTransportation
+      description: Add a transportation method to the trip
+      parameters:
+        - name: userId
+          in: path
+          description: The user's Id
+          required: true
+          style: simple
+          explode: false
+          schema:
+            type: integer
+            format: int64
+        - name: tripId
+          in: path
+          description: The trip's Id
+          required: true
+          style: simple
+          explode: false
+          schema:
+            type: integer
+            format: int64
+      requestBody:
+        description: The transportation details needed for the object to be created
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Transportation'
+        required: true
+      responses:
+        '200':
+          description: Successful transportation creation
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Transportation'
+        default:
+          description: unexpected error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+    get:
+      summary: Get transportation
+      operationId: getTransportation
+      description: Returns the transportation of a specific trip
+      parameters:
+        - name: userId
+          in: path
+          description: The user's Id
+          required: true
+          style: simple
+          explode: false
+          schema:
+            type: integer
+            format: int64
+        - name: tripId
+          in: path
+          description: The trip's Id
+          required: true
+          style: simple
+          explode: false
+          schema:
+            type: integer
+            format: int64
+      responses:
+        '200':
+          description: Successful retrieval of a specific trip's transportation
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Transportation'
+        default:
+          description: unexpected error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+  
+  /user/{userId}/trip/{tripId}/day:
+    post:
+      summary: Add a day
+      operationId: addDay
+      description: Adds an new day to the trip
+      parameters:
+        - name: userId
+          in: path
+          description: The user's Id
+          required: true
+          style: simple
+          explode: false
+          schema:
+            type: integer
+            format: int64
+        - name: tripId
+          in: path
+          description: The trip's Id
+          required: true
+          style: simple
+          explode: false
+          schema:
+            type: integer
+            format: int64
+      responses:
+        '200':
+          description: Successful day creation
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Trip'
+        default:
+          description: unexpected error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+                
+  /user/{userId}/trip/{tripId}/day/{dayId}:
+    get:
+      summary: Get day
+      operationId: getDay
+      description: Returns a specific day
+      parameters:
+        - name: userId
+          in: path
+          description: The user's Id
+          required: true
+          style: simple
+          explode: false
+          schema:
+            type: integer
+            format: int64
+        - name: tripId
+          in: path
+          description: The trip's Id
+          required: true
+          style: simple
+          explode: false
+          schema:
+            type: integer
+            format: int64
+        - name: dayId
+          in: path
+          description: The day's Id
+          required: true
+          style: simple
+          explode: false
+          schema:
+            type: integer
+            format: int64
+      responses:
+        '200':
+          description: Successful retrieval of a specific day
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Day'
+        default:
+          description: unexpected error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+    delete:
+      summary: Delete a certain day
+      operationId: deleteDay
+      description: Deletes a single day from the trip
+      parameters:
+        - name: userId
+          in: path
+          description: The user's Id
+          required: true
+          style: simple
+          explode: false
+          schema:
+            type: integer
+            format: int64
+        - name: tripId
+          in: path
+          description: The trip's Id
+          required: true
+          style: simple
+          explode: false
+          schema:
+            type: integer
+            format: int64
+        - name: dayId
+          in: path
+          description: The day's Id
+          required: true
+          style: simple
+          explode: false
+          schema:
+            type: integer
+            format: int64
+      responses:
+        '200':
+          description: Successful deletion of a specific day
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Trip'
+        default:
+          description: unexpected error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+    
+                
+  /user/{userId}/trip/{tripId}/day/{dayId}/activity:
+    post:
+      summary: Add an activity
+      operationId: addActivity      
+      description: Adds a blank activity inside a certain day
+      parameters:
+        - name: userId
+          in: path
+          description: The user's Id
+          required: true
+          style: simple
+          explode: false
+          schema:
+            type: integer
+            format: int64
+        - name: tripId
+          in: path
+          description: The trip's Id
+          required: true
+          style: simple
+          explode: false
+          schema:
+            type: integer
+            format: int64
+        - name: dayId
+          in: path
+          description: The day's Id
+          required: true
+          style: simple
+          explode: false
+          schema:
+            type: integer
+            format: int64
+      responses:
+        '200':
+          description: Successful activity creation
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Activity'
+        default:
+          description: unexpected error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+                
+  /user/{userId}/trip/{tripId}/day/{dayId}/activity/{activityId}:
+    get:
+      summary: Get an activity
+      operationId: getActivity
+      description: Retrieves a specific activity inside a certain day
+      parameters:
+        - name: userId
+          in: path
+          description: The user's Id
+          required: true
+          style: simple
+          explode: false
+          schema:
+            type: integer
+            format: int64
+        - name: tripId
+          in: path
+          description: The trip's Id
+          required: true
+          style: simple
+          explode: false
+          schema:
+            type: integer
+            format: int64
+        - name: dayId
+          in: path
+          description: The day's Id
+          required: true
+          style: simple
+          explode: false
+          schema:
+            type: integer
+            format: int64
+        - name: activityId
+          in: path
+          description: The activity's Id
+          required: true
+          style: simple
+          explode: false
+          schema:
+            type: integer
+            format: int64
+      responses:
+        '200':
+          description: Successful activity retrieval
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Activity'
+        default:
+          description: unexpected error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+    put:
+      summary: Put an activity
+      operationId: updateActivity
+      description: Updates an activity inside a certain day
+      parameters:
+        - name: userId
+          in: path
+          description: The user's Id
+          required: true
+          style: simple
+          explode: false
+          schema:
+            type: integer
+            format: int64
+        - name: tripId
+          in: path
+          description: The trip's Id
+          required: true
+          style: simple
+          explode: false
+          schema:
+            type: integer
+            format: int64
+        - name: dayId
+          in: path
+          description: The day's Id
+          required: true
+          style: simple
+          explode: false
+          schema:
+            type: integer
+            format: int64
+        - name: activityId
+          in: path
+          description: The activity's Id
+          required: true
+          style: simple
+          explode: false
+          schema:
+            type: integer
+            format: int64
+      responses:
+        '200':
+          description: Successful activity update
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Activity'
+        default:
+          description: unexpected error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+    delete:
+      summary: Delete an activity
+      operationId: deleteActivity
+      description: Deletes an activity inside a certain day
+      parameters:
+        - name: userId
+          in: path
+          description: The user's Id
+          required: true
+          style: simple
+          explode: false
+          schema:
+            type: integer
+            format: int64
+        - name: tripId
+          in: path
+          description: The trip's Id
+          required: true
+          style: simple
+          explode: false
+          schema:
+            type: integer
+            format: int64
+        - name: dayId
+          in: path
+          description: The day's Id
+          required: true
+          style: simple
+          explode: false
+          schema:
+            type: integer
+            format: int64
+        - name: activityId
+          in: path
+          description: The activity's Id
+          required: true
+          style: simple
+          explode: false
+          schema:
+            type: integer
+            format: int64
+      responses:
+        '200':
+          description: Successful activity deletion
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Activity'
+        default:
+          description: unexpected error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+                
+  /user/{userId}/trip/{tripId}/day/{dayId}/generateRandomActivities:
+    get:
+      summary: Generate activities
+      operationId: generateRandomActivities
+      description: Generates some random activities to fill the day with
+      parameters:
+        - name: userId
+          in: path
+          description: tags to filter by
+          required: true
+          style: simple
+          explode: false
+          schema:
+            type: integer
+            format: int64
+        - name: tripId
+          in: path
+          description: tags to filter by
+          required: true
+          style: simple
+          explode: false
+          schema:
+            type: integer
+            format: int64
+        - name: dayId
+          in: path
+          description: tags to filter by
+          required: true
+          style: simple
+          explode: false
+          schema:
+            type: integer
+            format: int64
+      responses:
+        '200':
+          description: user response
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Activity'
+        default:
+          description: unexpected error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+                
+components:
+  schemas:
+    User:
+      required:
+        - id
+        - name
+        - email
+        - password
+      type: object
+      properties:
+        id:
+          type: integer
+        name:
+          type: string
+        email:
+          type: string
+        password:
+          type: string
+          
+    Trip:
+      required:
+        - id
+        - destination
+        - dates
+        - budget
+      type: object
+      properties:
+        id:
+          type: integer
+        name:
+          type: string
+        destination:
+          type: string
+        dates:
+          type: string
+        budget:
+          type: integer
+        days:
+          type: object
+        accommodation:
+          type: object
+        transportation:
+          type: object
+        isPast:
+          type: boolean
+        daysList:
+          type: array
+          items:
+            type: integer
+          
+    Transportation:
+      required:
+        - date
+        - name
+        - time
+      type: object
+      properties:
+        name:
+          type: string
+        date:
+          type: string
+        time:
+          type: integer
+          
+    Accommodation:
+      required:
+        - address
+        - name
+        - price
+      type: object
+      properties:
+        name:
+          type: string
+        address:
+          type: string
+        price:
+          type: integer
+          
+    Day:
+      required:
+        - id
+        - dayNumber
+      type: object
+      properties:
+        id:
+          type: integer
+        dayNumber:
+          type: integer
+        activityList:
+          type: array
+          items:
+            type: object
+            
+    Activity:
+      required:
+        - description
+        - lockedStatus
+        - name
+      type: object
+      properties:
+        name:
+          type: string
+        description:
+          type: string
+        lockedStatus:
+          type: boolean
+            
+    Error:
+      required:
+        - code
+        - message
+      type: object
+      properties:
+        code:
+          type: integer
+          format: int32
+        message:
+          type: string
+          
